@@ -1,7 +1,11 @@
 # Compile assets
 FROM node:latest AS node
-COPY . /app
+RUN git clone https://github.com/asp-productions/asp.git /app
+WORKDIR /app
+RUN ls
 WORKDIR /app/src
+RUN ls
+RUN npm install
 RUN npm run build:production
 
 # Build site

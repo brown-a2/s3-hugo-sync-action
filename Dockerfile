@@ -1,12 +1,8 @@
 # Compile assets
 FROM node:latest AS node
 RUN git clone https://github.com/asp-productions/asp.git /app
-WORKDIR /app
-RUN ls
 WORKDIR /app/src
-RUN ls
-RUN npm install
-RUN npm run build:production
+RUN npm install && npm run build:production
 
 # Build site
 FROM jguyomard/hugo-builder:0.55 AS hugo
@@ -22,17 +18,13 @@ LABEL "com.github.actions.name"="S3 Hugo Sync Action"
 LABEL "com.github.actions.description"="Build a Hugo Site and deploy to AWS s3 bucket"
 LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="green"
-
 LABEL version="0.2.0"
 LABEL repository="https://github.com/brown-a2/s3-hugo-sync-action"
 LABEL homepage="https://github.com/brown-a2/"
 LABEL maintainer="browna2"
-
 ENV AWSCLI_VERSION='1.16.265'
-
 RUN apk add --no-cache --upgrade bash
 COPY --from=hugo /app/public /public
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
 ADD entrypoint.sh /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]

@@ -1,10 +1,6 @@
 # Compile assets
 FROM node:latest AS node
-COPY load-workspace.sh /load-workspace.sh
-RUN RUN chmod +x /load-workspace.sh
-RUN /load-workspace.sh
-#RUN git clone https://github.com/asp-productions/asp.git /app
-COPY /workspace/* /app
+RUN git clone https://github.com/asp-productions/asp.git /app
 WORKDIR /app/src
 RUN npm install && npm run build:production
 

@@ -22,6 +22,11 @@ if [ -z "$AWS_REGION" ]; then
   AWS_REGION="us-east-1"
 fi
 
+# Default to /public dir if not set.
+if [ -z "$SOURCE_DIR" ]; then
+  SOURCE_DIR="/public"
+fi
+
 # Override default AWS endpoint if user sets AWS_S3_ENDPOINT.
 if [ -n "$AWS_S3_ENDPOINT" ]; then
   ENDPOINT_APPEND="--endpoint-url $AWS_S3_ENDPOINT"
@@ -39,6 +44,7 @@ EOF
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
+# Looks in the container source directory (default /public) and syncs to s3
 sh -c "aws s3 sync ${SOURCE_DIR} s3://${AWS_S3_BUCKET}/${DEST_DIR} \
               --profile s3-hugo-sync-action \
               --no-progress \

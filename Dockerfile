@@ -1,10 +1,13 @@
 # Compile assets
 FROM node:latest AS node
-RUN git clone https://github.com/asp-productions/asp.git /app
+RUN RUN chmod +x /load-workspace.sh
+RUN /load-workspace.sh
+#RUN git clone https://github.com/asp-productions/asp.git /app
+COPY /workspace/* /app
 WORKDIR /app/src
 RUN npm install && npm run build:production
 
-# Build site
+# Then build Hugo site
 FROM jguyomard/hugo-builder:0.55 AS hugo
 ENV HUGO_ENV=production
 ENV HUGO_VERSION=0.55.6
@@ -12,7 +15,7 @@ COPY --from=node /app /app
 WORKDIR /app
 RUN hugo -d public
  
-# Connect and sync to s3
+# Connect and sync newly built site to s3
 FROM python:3.7-alpine
 LABEL "com.github.actions.name"="S3 Hugo Sync Action"
 LABEL "com.github.actions.description"="Build a Hugo Site and deploy to AWS s3 bucket"

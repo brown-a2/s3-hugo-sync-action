@@ -1,9 +1,9 @@
 # Compile assets
 FROM node:latest AS node
 
-${GITHUB_REPOSITORY}
-${GITHUB_WORKSPACE}
-${HOME}
+RUN echo $GITHUB_REPOSITORY
+RUN echo $GITHUB_WORKSPACE
+RUN echo $HOME
 
 RUN git clone https://github.com/asp-productions/asp.git /app
 WORKDIR /app/src

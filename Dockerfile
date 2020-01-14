@@ -1,15 +1,9 @@
 # Compile assets
 FROM node:latest AS node
 
-ARG GITHUB_REPOSITORY
-ARG GITHUB_WORKSPACE
-ARG HOME
-
-RUN echo $HOME
-RUN echo $GITHUB_WORKSPACE
-RUN echo $GITHUB_REPOSITORY
-
-RUN git clone https://github.com/asp-productions/asp.git /app
+RUN chmod +x /load-workspace.sh
+RUN /load-workspace.sh
+#RUN git clone https://github.com/asp-productions/asp.git /app
 WORKDIR /app/src
 RUN npm install && npm run build:production
 

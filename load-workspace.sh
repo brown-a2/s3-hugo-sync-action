@@ -8,6 +8,21 @@ set -e
 # fi
 
 echo $ENV
+
+cd home/
+
+ls
+
+cd ../bin
+
+ls
+
+cd ../run
+
+ls
+
+cd ../root
+
 ls
 
 echo $HOME

@@ -2,6 +2,11 @@
 
 set -e
 
+echo $HOME
+echo $GITHUB_WORKSPACE
+echo $GITHUB_REPOSITORY
+
+
 if [ -z "$AWS_S3_BUCKET" ]; then
   echo "AWS_S3_BUCKET is not set. Quitting."
   exit 1

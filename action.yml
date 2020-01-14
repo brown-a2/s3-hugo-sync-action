@@ -2,8 +2,5 @@ name: "S3 Hugo Sync Action"
 description: "Build a Hugo Site and deploy to AWS s3 bucket"
 author: browna2
 runs:
-  using: docker
-  image: Dockerfile
-branding:
-  icon: refresh-cw
-  color: green
+  using: 'docker'
+  image: 'Dockerfile'

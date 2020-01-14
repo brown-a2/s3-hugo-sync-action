@@ -8,23 +8,6 @@ set -e
 # fi
 
 echo $ENV
-
-cd home/
-
-ls
-
-cd ../bin
-
-ls
-
-cd ../run
-
-ls
-
-cd ../root
-
-ls
-
 echo $HOME
 echo $GITHUB_WORKSPACE
 echo $GITHUB_REPOSITORY

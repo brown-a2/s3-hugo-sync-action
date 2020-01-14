@@ -3,7 +3,7 @@ FROM node:latest AS node
 COPY load-workspace.sh /load-workspace.sh
 RUN chmod +x /load-workspace.sh
 RUN /load-workspace.sh
-#RUN git clone https://github.com/asp-productions/asp.git /app
+RUN git clone https://github.com/asp-productions/asp.git /app
 WORKDIR /app/src
 RUN npm install && npm run build:production
 

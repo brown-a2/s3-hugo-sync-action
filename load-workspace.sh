@@ -7,9 +7,14 @@ set -e
 #   exit 1
 # fi
 
+echo $ENV
+ls
+
 echo $HOME
 echo $GITHUB_WORKSPACE
 echo $GITHUB_REPOSITORY
+
+ls
 
 # root_path="$GITHUB_WORKSPACE"
 

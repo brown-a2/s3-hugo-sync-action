@@ -1,5 +1,10 @@
 # Compile assets
 FROM node:latest AS node
+
+${GITHUB_REPOSITORY}
+${GITHUB_WORKSPACE}
+${HOME}
+
 RUN git clone https://github.com/asp-productions/asp.git /app
 WORKDIR /app/src
 RUN npm install && npm run build:production
